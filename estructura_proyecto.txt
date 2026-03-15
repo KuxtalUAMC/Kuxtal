@@ -1,0 +1,43 @@
+kuxtal-app/
+├── client/                         # FRONTEND (React + Tailwind)
+│   ├── public/                     # Archivos estáticos (index.html, favicon)
+│   ├── src/
+│   │   ├── assets/                 # Imágenes, logos e iconos de Kuxtal
+│   │   │   └── images/             # Guardaremos aquí las interfaces y fotos estáticas
+│   │   ├── components/             # Componentes reutilizables
+│   │   │   └── layout/             # Componentes de estructura:
+│   │   │       ├── Topbar.jsx      # Barra superior (Perfil, Notificaciones)
+│   │   │       ├── Sidebar.jsx     # Menú lateral (Escritorio)
+│   │   │       ├── BottomNav.jsx   # Menú inferior (Móvil)
+│   │   │       └── Layout.jsx      # Contenedor que organiza los 3 anteriores
+│   │   ├── context/                # Estados globales (ej. Datos del usuario logueado)
+│   │   ├── hooks/                  # Lógica de React personalizada
+│   │   ├── pages/                  # Vistas completas de la app
+│   │   │   ├── auth/               # Login, Registro, Recuperar contraseña
+│   │   │   ├── nutrition/          # Módulo específico de nutrición
+│   │   │   ├── Home.jsx            # Pantalla principal (Selección de áreas)
+│   │   │   └── Profile.jsx         # Perfil y edición de datos
+│   │   ├── routes/                 # Configuración de react-router-dom
+│   │   ├── App.jsx                 # Componente principal
+│   │   ├── index.css               # Configuración de Tailwind CSS
+│   │   └── index.js                # Punto de entrada de React
+│   ├── Dockerfile                  # Receta para el contenedor del frontend
+│   └── package.json                # Dependencias del cliente
+│
+├── server/                         # BACKEND (Node.js + Express)
+│   ├── src/
+│   │   ├── config/                 # Conexión a DB y variables de entorno
+│   │   ├── controllers/            # Lógica de negocio (ej. qué pasa al agendar)
+│   │   ├── middlewares/            # Seguridad (ej. validar el token JWT)
+│   │   ├── models/                 # Definición de esquemas o consultas SQL
+│   │   ├── routes/                 # Definición de rutas de la API (/api/login)
+│   │   ├── uploads/                # Carpeta física para fotos de perfil subidas
+│   │   └── index.js                # Punto de entrada del servidor
+│   ├── Dockerfile                  # Receta para el contenedor del backend
+│   └── package.json                # Dependencias del servidor
+│
+├── database/                       # BASE DE DATOS
+│   └── init.sql                    # Script de creación de tablas inicial
+│
+├── docker-compose.yml              # Orquestador de todo el sistema
+└── .gitignore                      # Archivos que Git no debe subir
