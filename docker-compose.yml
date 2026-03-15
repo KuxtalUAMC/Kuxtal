@@ -1,0 +1,46 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:15
+    container_name: kuxtal_db
+    restart: always
+    environment:
+      POSTGRES_USER: user_kuxtal
+      POSTGRES_PASSWORD: password_safe
+      POSTGRES_DB: kuxtal_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./database/init.sql:/docker-entrypoint-initdb.d/init.sql
+      - postgres_data:/var/lib/postgresql/data
+
+  server:
+    build: ./server
+    container_name: kuxtal_server
+    ports:
+      - "4000:4000"
+    volumes:
+      - ./server:/usr/src/app
+      - /usr/src/app/node_modules
+    environment:
+      - DATABASE_URL=postgres://user_kuxtal:password_safe@db:5432/kuxtal_db
+      - JWT_SECRET=clave_secreta_uam
+    depends_on:
+      - db
+
+  client:
+    build: ./client
+    container_name: kuxtal_client
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./client:/usr/src/app
+      - /usr/src/app/node_modules
+    stdin_open: true
+    tty: true
+    depends_on:
+      - server
+
+volumes:
+  postgres_data:
