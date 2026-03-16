@@ -12,7 +12,7 @@ exports.signUp = async (req, res) => {
   const { nombre, apPaterno, apMaterno, correo, password, tipoUsuario } = req.body;
 
   // Validación de seguridad de contraseña en el Servidor
-  const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+  const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z\d]).{8,}$/;
   
   if (!passwordRegex.test(password)) {
     return res.status(400).json({ 
@@ -53,6 +53,21 @@ exports.signUp = async (req, res) => {
   } catch (err) {
     console.error(err.message);
     res.status(500).json({ message: "Error en el servidor al registrar" });
+  }
+};
+
+// --- FUNCIÓN GET ME ---
+exports.getMe = async (req, res) => {
+  try {
+    const result = await pool.query(
+      'SELECT id, nombre, apellido_paterno, apellido_materno, correo_institucional, tipo_usuario, rol FROM usuarios WHERE id = $1',
+      [req.user.id]
+    );
+    if (result.rows.length === 0) return res.status(404).json({ message: "Usuario no encontrado" });
+    res.json(result.rows[0]);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).json({ message: "Error al obtener el perfil" });
   }
 };
 

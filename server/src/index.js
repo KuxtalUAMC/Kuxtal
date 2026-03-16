@@ -15,7 +15,7 @@ const pool = new Pool({
 });
 
 // Middlewares Globales
-app.use(cors()); // Permite que el cliente (puerto 3000) se comunique con el server
+app.use(cors({ origin: 'http://localhost:3000', credentials: true }));
 app.use(express.json()); // Permite que el servidor entienda los JSON que envía Axios
 
 // Rutas de la API
