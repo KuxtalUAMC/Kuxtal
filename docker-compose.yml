@@ -16,18 +16,17 @@ services:
       - postgres_data:/var/lib/postgresql/data
 
   server:
-    build: ./server
-    container_name: kuxtal_server
-    ports:
-      - "4000:4000"
-    volumes:
-      - ./server:/usr/src/app
-      - /usr/src/app/node_modules
-    environment:
-      - DATABASE_URL=postgres://user_kuxtal:password_safe@db:5432/kuxtal_db
-      - JWT_SECRET=clave_secreta_uam
-    depends_on:
-      - db
+      build: ./server
+      container_name: kuxtal_server
+      ports:
+        - "4000:4000"
+      env_file:
+        - ./server/.env
+      volumes:
+        - ./server:/usr/src/app
+        - /usr/src/app/node_modules
+      depends_on:
+        - db
 
   client:
     build: ./client

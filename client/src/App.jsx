@@ -1,9 +1,26 @@
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Login from './pages/auth/Login';
+import SignUp from './pages/auth/SignUp';
+import Home from './pages/Home';
+import Layout from './components/layout/Layout';
+import ProtectedRoute from './routes/AppRoutes';
+
 function App() {
   return (
-    <div className="bg-blue-500 text-white p-10">
-      <h1 className="text-3xl font-bold">Bienvenido a Kuxtal 🚑</h1>
-      <p>¡Página en construccion!</p>
-    </div>
+    <Router>
+      <Routes>
+        <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<SignUp />} />
+
+        {/* TODAS LAS RUTAS AQUÍ ADENTRO REQUIEREN LOGIN */}
+        <Route element={<ProtectedRoute />}>
+          <Route element={<Layout />}>
+            <Route path="/" element={<Home />} />
+            {/* Otras rutas futuras como /nutricion van aquí */}
+          </Route>
+        </Route>
+      </Routes>
+    </Router>
   );
 }
 
