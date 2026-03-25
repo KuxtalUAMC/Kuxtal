@@ -1,11 +1,7 @@
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-const { Pool } = require('pg');
+const pool = require('../db');
 
-// Conexión a la DB
-const pool = new Pool({
-  connectionString: process.env.DATABASE_URL,
-});
 
 // --- FUNCIÓN DE REGISTRO ---
 exports.signUp = async (req, res) => {
