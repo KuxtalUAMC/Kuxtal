@@ -1,13 +1,15 @@
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { User, ClipboardList, Settings, HelpCircle, LogOut, ChevronRight, X } from 'lucide-react';
+import { useAuth } from '../context/AuthContext';
 
 const MiPerfil = () => {
   const navigate = useNavigate();
+  const { user, logout } = useAuth();
 
   // Función para cerrar sesión y limpiar caché
   const handleLogout = () => {
-    localStorage.removeItem('token');
+    logout();
     localStorage.removeItem('perfilCompleto');
     navigate('/login');
   };
@@ -28,8 +30,8 @@ const MiPerfil = () => {
           <User size={32} />
         </div>
         <div>
-          <h2 className="text-xl font-bold">Daniel</h2>
-          <p className="opacity-80 text-sm">Estudiante - UAM Cuajimalpa</p>
+          <h2 className="text-xl font-bold">{user?.nombre} {user?.apellido_paterno}</h2>
+          <p className="opacity-80 text-sm">{user?.tipo_usuario} - UAM Cuajimalpa</p>
         </div>
       </div>
 

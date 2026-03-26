@@ -106,6 +106,8 @@ exports.login = async (req, res) => {
       user: {
         id: user.id,
         nombre: user.nombre,
+        apellido_paterno: user.apellido_paterno,
+        tipo_usuario: user.tipo_usuario,
         rol: user.rol
       }
     });

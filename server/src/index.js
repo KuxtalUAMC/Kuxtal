@@ -5,6 +5,8 @@ const { Pool } = require('pg');
 
 // Importar rutas
 const authRoutes = require('./routes/authRoutes');
+const nutritionRoutes = require('./routes/nutritionRoutes');
+const especialistaRoutes = require('./routes/especialistaRoutes');
 
 const app = express();
 const PORT = process.env.PORT || 4000;
@@ -20,6 +22,8 @@ app.use(express.json()); // Permite que el servidor entienda los JSON que envía
 
 // Rutas de la API
 app.use('/api/auth', authRoutes);
+app.use('/api/nutrition', nutritionRoutes);
+app.use('/api/especialistas', especialistaRoutes);
 
 // Rutas de prueba
 app.get('/', (req, res) => {

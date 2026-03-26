@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Home, MessageCircle, Calendar, Heart, ClipboardList, User } from 'lucide-react';
+import { Home, MessageCircle, Calendar, Heart, ClipboardList } from 'lucide-react';
 
 const Sidebar = () => {
   const location = useLocation();

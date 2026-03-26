@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ChevronRight } from 'lucide-react';
+import axios from 'axios';
+import { useAuth } from '../context/AuthContext';
 
 const CuestionarioNutricion = () => {
   const navigate = useNavigate();
+  const { token } = useAuth();
 
   const [respuestas, setRespuestas] = useState({
     objetivoNutricional: '',
@@ -29,9 +32,9 @@ const CuestionarioNutricion = () => {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    
+
     // Validación: ¿cuestionario fue llenado por completo?
     if (!respuestas.objetivoNutricional || !respuestas.numComidas || !respuestas.estudiosLaboratorio) {
       alert('Por favor, completa las preguntas desplegables para continuar.');
@@ -39,8 +42,8 @@ const CuestionarioNutricion = () => {
     }
 
     const datosFinales = {
-      objetivoNutricional: respuestas.objetivoNutricional === 'Otro' 
-        ? respuestas.objetivoOtroTexto 
+      objetivoNutricional: respuestas.objetivoNutricional === 'Otro'
+        ? respuestas.objetivoOtroTexto
         : respuestas.objetivoNutricional,
       numComidas: respuestas.numComidas,
       restricciones_alimento: respuestas.restricciones.includes('Otra')
@@ -49,8 +52,14 @@ const CuestionarioNutricion = () => {
       estudiosLaboratorio: respuestas.estudiosLaboratorio === 'Sí'
     };
 
-    console.log("Datos que se enviarán a la BD:", datosFinales);
-    navigate('/doctores/nutricion'); 
+    try {
+      await axios.post('http://localhost:4000/api/nutrition/cuestionario', datosFinales, {
+        headers: { Authorization: `Bearer ${token}` }
+      });
+      navigate('/doctores/nutricion');
+    } catch (err) {
+      alert(err.response?.data?.message || 'Error al guardar el cuestionario');
+    }
   };
 
   const opcionesRestricciones = ['Vegano', 'Vegetariano', 'Intolerancia a la lactosa', 'Alergia al gluten / Celiaquía', 'Ninguna', 'Otra'];

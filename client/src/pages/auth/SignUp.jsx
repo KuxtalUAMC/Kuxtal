@@ -211,6 +211,7 @@ const SignUp = () => {
                     {showPassword ? <EyeOff size={17} /> : <Eye size={17} />}
                   </button>
                 </div>
+                <p className="text-xs text-gray-400 mt-1">Mín. 8 caracteres, mayúscula, minúscula, número y carácter especial (@$!%*?&)</p>
               </Field>
               <Field label="Confirma tu contraseña">
                 <div className="relative">
@@ -220,6 +221,11 @@ const SignUp = () => {
                   </button>
                 </div>
               </Field>
+              {error && step === 2 && (
+                <div className="bg-red-50 text-red-600 p-3 rounded-kuxtal text-xs border border-red-100 text-center">
+                  {error}
+                </div>
+              )}
               <button type="button" onClick={handleNextStep2} className="w-full bg-primary text-blanco py-3.5 rounded-kuxtal font-bold shadow-soft hover:opacity-90 active:scale-[0.98] transition-all duration-200 mt-2">
                 Continuar al Perfil Médico
               </button>
