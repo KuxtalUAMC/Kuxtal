@@ -1,13 +1,14 @@
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { User, ClipboardList, Settings, HelpCircle, LogOut, ChevronRight, X } from 'lucide-react';
+import { useAuth } from '../context/AuthContext';
 
 const MiPerfil = () => {
   const navigate = useNavigate();
+  const { user, logout } = useAuth();
 
-  // Función para cerrar sesión y limpiar caché
   const handleLogout = () => {
-    localStorage.removeItem('token');
+    logout();
     localStorage.removeItem('perfilCompleto');
     navigate('/login');
   };
@@ -28,15 +29,15 @@ const MiPerfil = () => {
           <User size={32} />
         </div>
         <div>
-          <h2 className="text-xl font-bold">Daniel</h2>
-          <p className="opacity-80 text-sm">Estudiante - UAM Cuajimalpa</p>
+          <h2 className="text-xl font-bold">{user?.nombre} {user?.apellido_paterno}</h2>
+          <p className="opacity-80 text-sm">{user?.tipo_usuario} - UAM Cuajimalpa</p>
         </div>
       </div>
 
       <div className="space-y-3">
         
         {/* 1. Datos personales */}
-        <button onClick={() => navigate('/editar-datos-medicos')} className="w-full flex items-center justify-between p-4 bg-white rounded-kuxtal shadow-sm border border-gray-50 hover:bg-secondary/30 transition-colors">
+        <Link to="/editar-datos-medicos" className="flex items-center justify-between p-4 bg-white rounded-kuxtal shadow-sm border border-gray-50 hover:bg-secondary/30 transition-colors">
           <div className="flex items-center gap-4">
             <div className="w-10 h-10 bg-blue-50 text-primary rounded-full flex items-center justify-center">
               <User size={20} />
@@ -44,7 +45,7 @@ const MiPerfil = () => {
             <span className="font-semibold text-textos">Editar datos personales</span>
           </div>
           <ChevronRight size={20} className="text-gray-400" />
-        </button>
+        </Link>
 
         {/* 2. Historial médico */}
         <Link to="/historial" className="flex items-center justify-between p-4 bg-white rounded-kuxtal shadow-sm border border-gray-50 hover:bg-secondary/30 transition-colors">

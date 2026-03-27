@@ -5,9 +5,11 @@ require('dotenv').config();
 // 1. Importamos el pool desde nuestro nuevo archivo
 const pool = require('./db'); 
 
-// 2. Importar rutas
+// Importar rutas
 const authRoutes = require('./routes/authRoutes');
-const appointmentRoutes = require('./routes/appointmentRoutes'); // <--- NUEVO
+const appointmentRoutes = require('./routes/appointmentRoutes');
+const nutritionRoutes = require('./routes/nutritionRoutes');
+const especialistaRoutes = require('./routes/especialistaRoutes');
 
 const app = express();
 const PORT = process.env.PORT || 4000;
@@ -18,8 +20,9 @@ app.use(express.json());
 
 // Rutas de la API
 app.use('/api/auth', authRoutes);
-app.use('/api/citas', appointmentRoutes); // <--- NUEVO
-//app.use('/api/citas', require('./routes/citas'));)
+app.use('/api/citas', appointmentRoutes);
+app.use('/api/nutrition', nutritionRoutes);
+app.use('/api/especialistas', especialistaRoutes);
 
 // Rutas de prueba
 app.get('/', (req, res) => {

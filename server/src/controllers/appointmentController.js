@@ -53,7 +53,7 @@ const getMisCitas = async (req, res) => {
     // Hacemos JOIN para traer el nombre de la doctora y su consultorio
     const query = `
       SELECT c.id, c.id_especialista, c.fecha_hora_inicio, c.estado, c.motivo_cancelacion,
-             u.nombre AS doctor_nombre, ep.especialidad, ep.consultorio
+             u.nombre AS doctor_nombre, ep.especialidad
       FROM citas c
       JOIN usuarios u ON c.id_especialista = u.id
       JOIN especialistas_perfil ep ON u.id = ep.id_usuario

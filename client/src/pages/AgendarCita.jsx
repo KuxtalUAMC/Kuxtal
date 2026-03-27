@@ -106,7 +106,7 @@ const AgendarCita = () => {
   return (
     <div className="max-w-md mx-auto min-h-screen pb-32 bg-white">
       {/* Topbar */}
-      <div className="px-4 py-4 flex items-center gap-4 border-b border-gray-100 sticky top-0 bg-white z-20">
+      <div className="px-4 py-4 flex items-center gap-4 sticky top-0 bg-white/80 backdrop-blur-md z-20 shadow-glass">
         <button onClick={() => navigate(-1)} className="p-2 hover:bg-gray-100 rounded-full">
           <ChevronLeft size={24} />
         </button>
@@ -128,7 +128,7 @@ const AgendarCita = () => {
         {error && <p className="bg-red-50 text-red-600 p-3 rounded-xl text-xs text-center border border-red-100">{error}</p>}
 
         {/* Calendario */}
-        <div className="bg-white p-4 rounded-3xl border border-gray-100 shadow-soft">
+        <div className="bg-surface p-4 rounded-3xl shadow-soft">
           <div className="flex items-center gap-2 mb-4 text-primary font-bold text-sm uppercase">
             <Calendar size={16} /> Selecciona el día
           </div>
@@ -146,7 +146,7 @@ const AgendarCita = () => {
 
         {/* Horarios */}
         {fechaSeleccionada && (
-          <div className="bg-white p-5 rounded-3xl border border-gray-100 shadow-soft animate-in fade-in slide-in-from-bottom-4">
+          <div className="bg-surface p-5 rounded-3xl shadow-soft animate-in fade-in slide-in-from-bottom-4">
             <h3 className="text-sm font-bold text-textos mb-4 flex items-center gap-2">
               <Clock size={16} className="text-primary"/> Horarios disponibles
             </h3>

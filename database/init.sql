@@ -55,13 +55,14 @@ CREATE TABLE citas (
     estado estado_cita_enum DEFAULT 'programada',
     motivo_consulta TEXT,
     indicaciones JSONB,
-    motivo_cancelacion TEXT
+    motivo_cancelacion TEXT,
+    visible_paciente BOOLEAN DEFAULT true
 );
 
 -- 6. HISTORIA CLÍNICA NUTRICIÓN
 CREATE TABLE historia_clinica_nutricion (
     id_usuario UUID PRIMARY KEY REFERENCES usuarios(id),
-    num_comidas INTEGER,
+    num_comidas VARCHAR(20),
     restricciones_alimento TEXT,
     estudios_laboratorio BOOLEAN DEFAULT false,
     objetivo_nutricional TEXT

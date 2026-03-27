@@ -1,19 +1,41 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { UserCircle, ShieldCheck, ChevronRight, X, Info } from 'lucide-react';
+import axios from 'axios';
+import { useAuth } from '../context/AuthContext';
 
 const InfoEspecialista = () => {
   const navigate = useNavigate();
-  const { id } = useParams(); // Obtenemos el ID de la URL
+  const { id } = useParams();
+  const { token } = useAuth();
+  const [especialista, setEspecialista] = useState(null);
+  const [loading, setLoading] = useState(true);
 
-  // Mock temporal para mostrar datos (En el futuro será axios.get(`/api/doctores/${id}`))
-  const especialista = {
-    nombre: 'Dra. Sofía Ramírez',
-    especialidad: 'Nutrióloga Clínica',
-    universidad: 'UNAM',
-    cedula: 'CED-UNAM-9876',
-    bio: 'Egresada de la Máxima Casa de Estudios (UNAM). Cuenta con más de 8 años de experiencia en el sector salud público y privado. Se especializa en el tratamiento integral de pacientes con síndrome metabólico, diabetes tipo 2 y obesidad severa. Su enfoque se basa en la nutrición basada en evidencia, buscando no solo el control de peso, sino la sanación de la relación del paciente con la comida mediante educación nutricional constante.'
-  };
+  useEffect(() => {
+    const fetchInfo = async () => {
+      try {
+        const res = await axios.get(
+          `http://localhost:4000/api/especialistas/${id}`,
+          { headers: { Authorization: `Bearer ${token}` } }
+        );
+        const doc = res.data;
+        setEspecialista({
+          nombre: `Dra. ${doc.nombre} ${doc.apellido_paterno}`,
+          especialidad: doc.especialidad,
+          cedula: doc.cedula_profesional,
+          bio: doc.bio_extracto
+        });
+      } catch (err) {
+        console.error('Error:', err);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchInfo();
+  }, [id, token]);
+
+  if (loading) return <div className="text-center py-20">Cargando...</div>;
+  if (!especialista) return <div className="text-center py-20">Especialista no encontrado</div>;
 
   return (
     <div className="max-w-md mx-auto py-8 px-4 animate-in fade-in zoom-in duration-300">
@@ -22,12 +44,12 @@ const InfoEspecialista = () => {
           <UserCircle size={100} className="text-primary" />
         </div>
         <h1 className="text-2xl font-bold text-textos leading-tight">{especialista.nombre}</h1>
-        <p className="text-sm font-semibold text-primary">{especialista.especialidad} | {especialista.universidad}</p>
+        <p className="text-sm font-semibold text-primary">{especialista.especialidad}</p>
       </div>
 
       <div className="space-y-6">
         {/* Caja de Datos Oficiales */}
-        <div className="bg-white p-6 rounded-3xl border border-gray-100 shadow-soft space-y-6">
+        <div className="bg-surface p-6 rounded-3xl shadow-soft space-y-6">
           <div>
             <div className="flex items-center gap-2 text-primary mb-2">
               <ShieldCheck size={18} />

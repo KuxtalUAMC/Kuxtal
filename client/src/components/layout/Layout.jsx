@@ -6,7 +6,7 @@ import BottomNav from './BottomNav';
 
 const Layout = () => {
   return (
-    <div className="flex h-screen bg-gray-50 overflow-hidden">
+    <div className="flex h-screen bg-background overflow-hidden">
       <aside className="hidden md:flex md:flex-shrink-0">
         <Sidebar />
       </aside>
@@ -20,7 +20,7 @@ const Layout = () => {
           </div>
         </main>
 
-        <nav className="md:hidden fixed bottom-0 left-0 right-0 bg-blanco border-t border-gray-100 shadow-soft">
+        <nav className="md:hidden fixed bottom-0 left-0 right-0 bg-white/80 backdrop-blur-md shadow-glass">
           <BottomNav />
         </nav>
       </div>
