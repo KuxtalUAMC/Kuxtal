@@ -13,6 +13,9 @@ import Nutricion from './pages/Nutricion';
 import CuestionarioNutricion from './pages/CuestionarioNutricion';
 import ElegirEspecialista from './pages/ElegirEspecialista';
 import InfoEspecialista from './pages/InfoEspecialista';
+import AgendarCita from './pages/AgendarCita';
+import CitaAgendada from './pages/CitaAgendada';
+import MisCitas from './pages/MisCitas';
 
 function App() {
   return (
@@ -41,15 +44,16 @@ function App() {
               <Route path="/doctores/nutricion" element={<ElegirEspecialista />} />
               <Route path="/doctores/nutricion/info/:id" element={<InfoEspecialista />} />
 
-              {/* Ruta temporal para agendar */}
-              <Route path="/agendar/nutricion" element={<UnderConstruction title="Agendar Cita de Nutrición" />} />
-
+              {/* Rutas para agendar */}
+              <Route path="/agendar/nutricion" element={<AgendarCita />} />
+              <Route path="/cita-agendada" element={<CitaAgendada />} />
+              
               {/* Módulo de Notificaciones */}
               <Route path="/notificaciones" element={<UnderConstruction title="Notificaciones" />} />
 
               {/* Botones de navegación inferior */}
               <Route path="/mensajes" element={<UnderConstruction title="Mensajes" />} />
-              <Route path="/mis-citas" element={<UnderConstruction title="Mis Citas" />} />
+              <Route path="/mis-citas" element={<MisCitas />} />
               <Route path="/favoritos" element={<UnderConstruction title="Favoritos" />} />
               <Route path="/historial" element={<UnderConstruction title="Mi Historial Médico" />} />
             </Route>

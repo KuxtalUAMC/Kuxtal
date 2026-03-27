@@ -85,13 +85,12 @@ const ElegirEspecialista = () => {
                   </div>
                 </div>
 
-                {/* Información de Horarios (Lo nuevo) */}
                 <div className="bg-secondary/30 rounded-2xl p-3 flex justify-around text-[11px] font-bold text-gray-600 uppercase tracking-tight">
                   <div className="flex items-center gap-1.5"><Clock size={14} className="text-primary"/> {doc.horario}</div>
                   <div className="flex items-center gap-1.5"><Calendar size={14} className="text-primary"/> {doc.dias}</div>
                 </div>
 
-                {/* Botones de la Tarjeta */}
+                {/* Botones de la Tarjeta (Corregidos sin duplicados) */}
                 <div className="flex gap-2 mt-2">
                   <button 
                     onClick={() => navigate(`/doctores/nutricion/info/${doc.id}`)}
@@ -100,7 +99,7 @@ const ElegirEspecialista = () => {
                     <Info size={14} /> Información
                   </button>
                   <button 
-                    onClick={() => navigate('/agendar/nutricion')}
+                    onClick={() => navigate('/agendar/nutricion', { state: { doctor: doc } })}
                     className="flex-1 flex items-center justify-center gap-2 py-2.5 bg-primary text-white rounded-xl font-bold text-xs shadow-md hover:opacity-90 transition-all"
                   >
                     Agendar cita <ChevronRight size={14} />
@@ -111,7 +110,7 @@ const ElegirEspecialista = () => {
           })}
         </div>
 
-        {/* BOTONES DE NAVEGACIÓN INFERIOR (Escape Hatch) */}
+        {/* BOTONES DE NAVEGACIÓN INFERIOR */}
         <div className="mt-12 space-y-3">
           <button onClick={() => navigate(-1)} className="w-full flex items-center justify-center gap-2 p-4 bg-white border border-gray-200 text-gray-600 rounded-kuxtal font-bold shadow-sm hover:bg-gray-50 transition-colors">
             Atrás

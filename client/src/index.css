@@ -1,3 +1,65 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* ESTILOS PERSONALIZADOS PARA FULLCALENDAR KUXTAL */
+
+/* 1. Resetear bordes generales y fondo */
+.fc .fc-view-harness {
+  background-color: #fff;
+}
+.fc-theme-standard td, .fc-theme-standard th {
+  border: 1px solid #f3f4f6; /* border-gray-100 */
+}
+.fc-theme-standard .fc-scrollgrid {
+  border: none;
+}
+
+/* 2. Cabecera (Título y botones de mes) */
+.fc .fc-toolbar-title {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #252525; /* text-textos */
+  text-transform: capitalize;
+}
+.fc .fc-button-primary {
+  background-color: transparent;
+  border: none;
+  color: #2260FF; /* text-primary */
+  padding: 0.25rem;
+}
+.fc .fc-button-primary:hover, .fc .fc-button-primary:focus {
+  background-color: #D8E9F3; /* bg-secondary */
+  color: #2260FF;
+  box-shadow: none !important;
+}
+
+/* 3. Los días de la semana */
+.fc-col-header-cell-cushion {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: #2260FF;
+  letter-spacing: 0.05em;
+  padding: 8px 0 !important;
+}
+
+/* 4. Las celdas de los días */
+.fc-daygrid-day-number {
+  font-size: 12px;
+  color: #252525;
+  padding: 4px !important;
+}
+.fc-daygrid-day:hover {
+  background-color: #f0f9ff; /* hover:bg-cyan-50 (ligero toque de color) */
+  cursor: pointer;
+}
+
+/* 5. DÍA SELECCIONADO */
+.fc-day-selected-kuxtal {
+  background-color: #2260FF !important; /* bg-primary */
+}
+.fc-day-selected-kuxtal .fc-daygrid-day-number {
+  color: #fff !important; /* text-white */
+  font-weight: bold;
+}
